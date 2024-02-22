@@ -53,11 +53,12 @@ int getLength(struct Node *head)
 struct Node *sortNumbers(struct Node *head)
 {
   struct Node *ptr = head;
-  struct Node *prev, *after;
+  struct Node *prev;
   while(ptr != NULL){
-    after = ptr->next;
-    if (ptr->value > after->value){
-      swapNode(prev, ptr);
+    prev->next = ptr;
+    if (ptr->value > ptr->next->value){
+      cout << "swap" << endl;
+      ptr = swapNode(prev, ptr);
     }
     ptr = ptr->next;
   }
@@ -67,6 +68,7 @@ struct Node *sortNumbers(struct Node *head)
 struct Node *swapNode(struct Node *prev, struct Node *ptr)
 {
   struct Node *after;
+  after = ptr->next;
   prev->next = after;
   ptr->next = after->next;
   after->next = ptr;
